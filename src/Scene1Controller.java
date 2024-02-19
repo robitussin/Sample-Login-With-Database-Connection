@@ -38,23 +38,23 @@ public class Scene1Controller {
         if(DatabaseHandler.validateLogin(username, password))
         {
             System.out.println("Successful");
+
+            // Load Scene2.fxml when login button is clicked
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene2.fxml"));
+            // Load Scene2Controller
+            root = loader.load();
+            Scene2Controller scene2Controller = loader.getController();
+            // Pass username from textfield to displayName() method
+            scene2Controller.displayName(username);
+
+            // Load stage and scene
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
         else{
             System.out.println("Unsuccessful");
         }
-        
-       // Load Scene2.fxml when login button is clicked
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene2.fxml"));
-        // Load Scene2Controller
-        root = loader.load();
-        Scene2Controller scene2Controller = loader.getController();
-        // Pass username from textfield to displayName() method
-        scene2Controller.displayName(username);
-
-        // Load stage and scene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 }

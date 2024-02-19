@@ -1,4 +1,5 @@
 import java.sql.*;
+
 public class DatabaseHandler {
 
     private static DatabaseHandler handler = null;
@@ -15,7 +16,7 @@ public class DatabaseHandler {
     public static Connection getDBConnection()
     {
         Connection connection = null;
-        String dburl = "jdbc:mysql://localhost:3306/librarydb?useSSL=false";
+        String dburl = "jdbc:mysql://localhost:3306/librarydb";
         String userName = "root";
         String password = "abc12345";
 
@@ -47,8 +48,12 @@ public class DatabaseHandler {
 
 
     public static boolean validateLogin(String username, String password){
+
         getInstance();
         String query = "SELECT * FROM admin WHERE UserName = '" + username + "' AND Password = '" + password + "'";
+        
+        System.out.println(query);
+
         ResultSet result = handler.execQuery(query);
         try {
             if (result.next()) {
